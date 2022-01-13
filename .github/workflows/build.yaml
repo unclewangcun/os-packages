@@ -92,4 +92,4 @@ jobs:
             resources-${{ matrix.image_name }}-${{ env.IMAGE_TAG }}.sha256sum.txt
             resources-${{ matrix.image_name }}-${{ env.IMAGE_TAG }}-amd64.tar.gz
             resources-${{ matrix.image_name }}-${{ env.IMAGE_TAG }}-arm64.tar.gz
-            resources-${{ matrix.image_name }}-${{ env.IMAGE_TAG }}-armhf.tar.gz
+            resources-${{ matrix.image_name }}-${{ env.IMAGE_TAG }}-arm.tar.gz
