@@ -73,11 +73,12 @@ jobs:
       - name: Prepare for upload package
         shell: bash
         run: |
+          ls -alh
           mv linux_amd64/resources resources
           tar -I pigz -cf resources-${{ matrix.image_name }}-${IMAGE_TAG}-amd64.tar.gz resources --remove-files
           mv linux_arm64/resources resources
           tar -I pigz -cf resources-${{ matrix.image_name }}-${IMAGE_TAG}-arm64.tar.gz resources --remove-files
-          mv linux_arm/resources resources
+          mv linux_arm_v7/resources resources
           tar -I pigz -cf resources-${{ matrix.image_name }}-${IMAGE_TAG}-arm.tar.gz resources --remove-files
           sha256sum resources-${{ matrix.image_name }}-${IMAGE_TAG}-{amd64,arm64,arm}.tar.gz > resources-${{ matrix.image_name }}-${IMAGE_TAG}.sha256sum.txt
 
