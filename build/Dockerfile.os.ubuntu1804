@@ -3,7 +3,7 @@ ARG TARGETARCH
 ARG OS_VERSION=bionic
 ARG DEP_PACKAGES="apt-transport-https ca-certificates curl wget gnupg dpkg-dev"
 
-RUN ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') \
+RUN ARCH=$(uname -m | sed 's:x86_64:amd64:;s:aarch64:arm64:;s:armv7l:armhf:') \
     && apt update -qq \
     && apt install -y --no-install-recommends $DEP_PACKAGES \
     && curl -fsSL "https://download.docker.com/linux/debian/gpg" | apt-key add -qq - \
@@ -13,7 +13,7 @@ RUN ARCH=$(uname -m | sed 's/x86_64/amd64/;s/aarch64/arm64/') \
 WORKDIR /ubuntu/${TARGETARCH}
 COPY packages.yaml .
 
-COPY --from=mikefarah/yq:4.11.1 /usr/bin/yq /usr/bin/yq
+COPY yq_linux_${ARCH} /usr/bin/yq
 RUN yq eval '.common[],.apt[],.kubespray.common[],.kubespray.apt[],.ubuntu[]' packages.yaml > packages.list \
     && dpkg --get-selections | grep -v deinstall | cut -f1 | cut -d ':' -f1 >> packages.list \
     && sort -u packages.list | xargs apt-get install --reinstall --print-uris | awk -F "'" '{print $2}' | grep -v '^$' | sort -u > packages.urls
