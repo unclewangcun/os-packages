@@ -53,7 +53,7 @@ jobs:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
           file: ${{ matrix.dockerfile }}
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64,linux/arm64,linux/armhf
           tags: |
             ${{ env.IMAGE_REPO }}/${{ matrix.image_name }}:${{ env.IMAGE_TAG }}
 
@@ -69,7 +69,9 @@ jobs:
           tar -I pigz -cf resources-${{ matrix.image_name }}-${IMAGE_TAG}-amd64.tar.gz resources --remove-files
           mv linux_arm64/resources resources
           tar -I pigz -cf resources-${{ matrix.image_name }}-${IMAGE_TAG}-arm64.tar.gz resources --remove-files
-          sha256sum resources-${{ matrix.image_name }}-${IMAGE_TAG}-{amd64,arm64}.tar.gz > resources-${{ matrix.image_name }}-${IMAGE_TAG}.sha256sum.txt
+          mv linux_armhf/resources resources
+          tar -I pigz -cf resources-${{ matrix.image_name }}-${IMAGE_TAG}-armhf.tar.gz resources --remove-files
+          sha256sum resources-${{ matrix.image_name }}-${IMAGE_TAG}-{amd64,arm64,armhf}.tar.gz > resources-${{ matrix.image_name }}-${IMAGE_TAG}.sha256sum.txt
 
       - name: Release and upload packages
         if: startsWith(github.ref, 'refs/tags/')
