@@ -13,7 +13,7 @@ RUN ARCH=$(uname -m | sed 's:x86_64:amd64:;s:aarch64:arm64:;s:armv7l:armhf:') \
 WORKDIR /ubuntu/${TARGETARCH}
 COPY packages.yaml .
 
-COPY yq_linux_${ARCH} /usr/bin/yq
+COPY yq_linux_${TARGETARCH} /usr/bin/yq
 RUN yq eval '.common[],.apt[],.kubespray.common[],.kubespray.apt[],.ubuntu[]' packages.yaml > packages.list \
     && dpkg --get-selections | grep -v deinstall | cut -f1 | cut -d ':' -f1 >> packages.list \
     && sort -u packages.list | xargs apt-get install --reinstall --print-uris | awk -F "'" '{print $2}' | grep -v '^$' | sort -u > packages.urls
