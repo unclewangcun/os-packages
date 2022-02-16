@@ -22,7 +22,7 @@ jobs:
           - name: ubuntu-1804
             image_name: os-packages-ubuntu1804
             dockerfile: build/Dockerfile.os.ubuntu1804
-          - name: ubuntu-20.04
+          - name: ubuntu-2004
             image_name: os-packages-ubuntu2004
             dockerfile: build/Dockerfile.os.ubuntu2004
     steps:
