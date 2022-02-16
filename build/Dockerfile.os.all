@@ -1,2 +1,3 @@
 FROM scratch
 COPY --from=IMAGE_REPO/os-packages-ubuntu1804:IMAGE_TAG / /
+COPY --from=IMAGE_REPO/os-packages-ubuntu2004:IMAGE_TAG / /
