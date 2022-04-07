@@ -15,5 +15,6 @@ common:
   - socat
   - supervisor
   - vim
+  - ufw
   - unzip
   - wget
