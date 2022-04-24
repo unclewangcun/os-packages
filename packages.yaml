@@ -2,6 +2,7 @@
 common:
   - anacron
   - chrony
+  - gnome-control-center
   - keepalived
   - lsof
   - less
