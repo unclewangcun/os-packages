@@ -9,6 +9,7 @@ common:
   - net-tools
   - netcat
   - openssh-server
+  - python
   - rabbitmq-server
   - rsync
   - snmpd
