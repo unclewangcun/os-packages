@@ -8,6 +8,7 @@ common:
   - mysql-server
   - net-tools
   - netcat
+  - netplan.io
   - openssh-server
   - rabbitmq-server
   - rsync
