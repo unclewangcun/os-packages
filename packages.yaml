@@ -2,6 +2,7 @@
 common:
   - anacron
   - chrony
+  - curl
   - keepalived
   - lsof
   - less
